@@ -30,8 +30,13 @@ const useStyles = makeStyles(theme => ({
         fontSize: '32px',
         fontWeight: 'bold',
         color: '#57B8FF',
-        marginLeft: '13px',
+        marginLeft: '36px',
+        marginBottom: '50px',
+    },
+    items: {
+        color: '#57B8FF',
     }
+
 }));
 
 const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
@@ -54,37 +59,41 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
     const classes = useStyles();
 
     return (
-        <div style={{height: 'auto'}}>
-            <span className={classes.logo}>
+        <div>
+            <div className={classes.logo}>
+            <span >
                 Turbo
             </span>
+            </div>
 
             {' '}
-            <DashboardMenuItem onClick={onMenuClick} sidebarIsOpen={open} />
+            {/* <DashboardMenuItem onClick={onMenuClick} sidebarIsOpen={open} /> */}
             <SubMenu
                 handleToggle={() => handleToggle('menuSales')}
                 isOpen={state.menuSales}
                 sidebarIsOpen={open}
-                name="pos.menu.sales"
+                name="Stations"
                 icon={<orders.icon />}
                 dense={dense}   
             >
                 <MenuItemLink
+                    className={classes.items}
                     to={`/commands`}
                     primaryText={translate(`resources.commands.name`, {
                         smart_count: 2,
                     })}
-                    leftIcon={<orders.icon />}
+                    leftIcon={<orders.icon className={classes.items} />}
                     onClick={onMenuClick}
                     sidebarIsOpen={open}
                     dense={dense}
                 />
                 <MenuItemLink
+                    className={classes.items}
                     to={`/invoices`}
                     primaryText={translate(`resources.invoices.name`, {
                         smart_count: 2,
                     })}
-                    leftIcon={<invoices.icon />}
+                    leftIcon={<invoices.icon className={classes.items}/>}
                     onClick={onMenuClick}
                     sidebarIsOpen={open}
                     dense={dense}
@@ -94,11 +103,12 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                 handleToggle={() => handleToggle('menuCatalog')}
                 isOpen={state.menuCatalog}
                 sidebarIsOpen={open}
-                name="pos.menu.catalog"
+                name="Customer"
                 icon={<products.icon />}
                 dense={dense}
             >
                 <MenuItemLink
+                    className={classes.items}
                     to={`/products`}
                     primaryText={translate(`resources.products.name`, {
                         smart_count: 2,
@@ -109,6 +119,7 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                     dense={dense}
                 />
                 <MenuItemLink
+                    className={classes.items}
                     to={`/categories`}
                     primaryText={translate(`resources.categories.name`, {
                         smart_count: 2,
@@ -123,11 +134,12 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                 handleToggle={() => handleToggle('menuCustomers')}
                 isOpen={state.menuCustomers}
                 sidebarIsOpen={open}
-                name="pos.menu.customers"
+                name="Users"
                 icon={<visitors.icon />}
                 dense={dense}
             >
                 <MenuItemLink
+                    className={classes.items}
                     to={`/customers`}
                     primaryText={translate(`resources.customers.name`, {
                         smart_count: 2,
@@ -138,6 +150,7 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                     dense={dense}
                 />
                 <MenuItemLink
+                    className={classes.items}
                     to={`/segments`}
                     primaryText={translate(`resources.segments.name`, {
                         smart_count: 2,
@@ -149,11 +162,12 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                 />
             </SubMenu>
             <MenuItemLink
+                className={classes.items}
                 to={`/reviews`}
                 primaryText={translate(`resources.reviews.name`, {
                     smart_count: 2,
                 })}
-                leftIcon={<reviews.icon />}
+                leftIcon={<reviews.icon className={classes.items} />}
                 onClick={onMenuClick}
                 sidebarIsOpen={open}
                 dense={dense}

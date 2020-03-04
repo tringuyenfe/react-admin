@@ -11,7 +11,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useTranslate } from 'react-admin';
 
 const useStyles = makeStyles(theme => ({
-    icon: { minWidth: theme.spacing(5) },
+    icon: { 
+        minWidth: theme.spacing(5),
+        color: '#57B8FF',
+    },
+    typo: {
+        color: '#57B8FF',
+    },
     sidebarIsOpen: {
         paddingLeft: 25,
         transition: 'padding-left 195ms cubic-bezier(0.4, 0, 0.6, 1) 0ms',
@@ -48,7 +54,7 @@ const SubMenu: FC<Props> = ({
             <ListItemIcon className={classes.icon}>
                 {isOpen ? <ExpandMore /> : icon}
             </ListItemIcon>
-            <Typography variant="inherit" color="textSecondary">
+            <Typography className={classes.typo} variant="inherit" color="textSecondary">
                 {translate(name)}
             </Typography>
         </MenuItem>
