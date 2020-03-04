@@ -26,6 +26,7 @@ import {
 import NbItemsField from './NbItemsField';
 import CustomerReferenceField from '../visitors/CustomerReferenceField';
 import MobileGrid from './MobileGrid';
+import Table from '../dataTables';
 
 const OrderFilter = props => (
     <Filter {...props}>
@@ -90,14 +91,17 @@ class TabbedDatagrid extends React.Component {
     
     foreachData = (datas) => {
         var result = datas.map((data, index) => {
-            switch (data.date) {
+            switch (data.key) {
                 case 'date':
+                    key.push(<DateField key={index} source="date" showTime />)
                     break;
-            
+                case 'Reference':
+                    key.push(<TextField key={index} source="reference" />)
                 default:
                     break;
             }
         });
+        return key;
     }
 
     render() {
@@ -111,7 +115,8 @@ class TabbedDatagrid extends React.Component {
                     centered
                     value={filterValues.status}
                     indicatorColor="primary"
-                    onChange={this.handleChange} >
+                    onChange={this.handleChange}
+                >
                     {this.tabs.map(choice => (
                         <Tab
                             key={choice.id}
@@ -128,7 +133,7 @@ class TabbedDatagrid extends React.Component {
                     />
                 ) : (
                     <div>
-                        <a onClick = {this.foreachData(datakeyOrder)}>aaaaaaaa</a>
+                        {/* //<a onClick = {this.foreachData(datakeyOrder)}>aaaaaaaa</a> */}
                         {filterValues.status === 'ordered' && (
                             <Datagrid
                                 {...props}
@@ -137,7 +142,9 @@ class TabbedDatagrid extends React.Component {
                                 rowClick="edit"
                             >
                                 <DateField source="date" showTime />
-                                <TextField source="reference" />
+                                <Table />
+                                
+                                {/* <TextField source="reference" />
                                 <CustomerReferenceField />
                                 <NbItemsField />
                                 <NumberField
@@ -147,7 +154,7 @@ class TabbedDatagrid extends React.Component {
                                         currency: 'USD',
                                     }}
                                     className={classes.total}
-                                />
+                                /> */}
                             </Datagrid>
                         )}
                         {filterValues.status === 'delivered' && (

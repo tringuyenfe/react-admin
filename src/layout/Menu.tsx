@@ -2,8 +2,9 @@ import React, { FC, useState } from 'react';
 import { useSelector } from 'react-redux';
 import SettingsIcon from '@material-ui/icons/Settings';
 import LabelIcon from '@material-ui/icons/Label';
-import { useMediaQuery, Theme } from '@material-ui/core';
+import { useMediaQuery, Theme,TextField } from '@material-ui/core';
 import { useTranslate, DashboardMenuItem, MenuItemLink } from 'react-admin';
+import { makeStyles } from '@material-ui/core/styles';
 
 import visitors from '../visitors';
 import orders from '../orders';
@@ -13,6 +14,7 @@ import categories from '../categories';
 import reviews from '../reviews';
 import SubMenu from './SubMenu';
 import { AppState } from '../types';
+import color from '@material-ui/core/colors/amber';
 
 type MenuName = 'menuCatalog' | 'menuSales' | 'menuCustomers';
 
@@ -21,6 +23,16 @@ interface Props {
     logout: () => void;
     onMenuClick: () => void;
 }
+
+const useStyles = makeStyles(theme => ({
+    logo: {
+        fontFamily: 'Asap',
+        fontSize: '32px',
+        fontWeight: 'bold',
+        color: '#57B8FF',
+        marginLeft: '13px',
+    }
+}));
 
 const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
     const [state, setState] = useState({
@@ -39,8 +51,14 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
         setState(state => ({ ...state, [menu]: !state[menu] }));
     };
 
+    const classes = useStyles();
+
     return (
-        <div>
+        <div style={{height: 'auto'}}>
+            <span className={classes.logo}>
+                Turbo
+            </span>
+
             {' '}
             <DashboardMenuItem onClick={onMenuClick} sidebarIsOpen={open} />
             <SubMenu
@@ -49,7 +67,7 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                 sidebarIsOpen={open}
                 name="pos.menu.sales"
                 icon={<orders.icon />}
-                dense={dense}
+                dense={dense}   
             >
                 <MenuItemLink
                     to={`/commands`}
